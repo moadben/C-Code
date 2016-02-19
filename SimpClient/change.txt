@@ -1,0 +1,11 @@
+14/01/2016 - Read wiki page on socket programming, made basic socket and sent request
+
+15/01/2016 - Made initial client server, sends requests and outputs.
+
+17/01/2016 - Parses into header and body
+
+23/01/2016 - Made basic server, can recieve get request and output header
+
+25/01/2016 - Finished both server and client, changed to SimpClient/SimpServer + input format.
+
+27/01/2016 - Added changes so that it checks HTTP + Server sends time.

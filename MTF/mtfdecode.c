@@ -1,0 +1,180 @@
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int count = 0;
+
+
+void reallocate_words(char*** words_ptr, int* words_size_pointer){
+	*words_size_pointer = *words_size_pointer*2;
+	*words_ptr = (char**) realloc(*words_ptr, (*words_size_pointer) * (sizeof(**words_ptr)));
+
+}
+
+void move_to_front(int index, char*** words){
+	int i;
+	char *t = (*words)[index];
+	for(i = index; i>1; i--){
+		(*words)[i] = (*words)[i-1];
+	}
+	
+	(*words)[1] = t;
+
+}
+
+
+void add_word(char*** words, char* word, int* words_size_pointer, int pos){
+	int len = strlen(word);
+	char* temp = (char*) malloc((len+1)*sizeof(char));
+	strcpy(temp, word);
+	if (pos >= *words_size_pointer){
+		reallocate_words(words,words_size_pointer);
+	}
+
+	(*words)[pos] = temp;
+	count++;
+}
+
+void decode(FILE *f, FILE *f_two, char*** words, int* words_size_pointer){
+	int next_char;
+	char* temp_word;
+	char temp;
+	int i;
+	int pos;
+	int pos_temp;
+	while((next_char= fgetc(f)) != EOF){
+		if(next_char >= 128 && ((next_char)-128)>count){
+			i = 0;
+			pos = next_char-128;
+			printf("%d\n", pos);
+			next_char = fgetc(f);
+			while(next_char < 128 && next_char != '\n'){
+				temp = (char)next_char;
+				temp_word[i] = temp;
+				next_char = fgetc(f);
+				i++;
+			}
+			temp_word[i] = '\0';
+			printf("%s\n", temp_word);
+			add_word(words, temp_word, words_size_pointer, pos);
+			move_to_front(pos, words);
+			fprintf(f_two, "%s", temp_word);
+			if(next_char != '\n'){
+				fprintf(f_two, " ");
+			}
+			ungetc(next_char, f);
+		}
+		else if((next_char-128) == 121){
+			i = 0;
+			next_char = fgetc(f);
+			pos = next_char+121;
+			if(pos>count){
+				printf("%d\n", pos);
+				next_char = fgetc(f);
+				while(next_char != '\n' && next_char<128){
+					temp = (char)next_char;
+					temp_word[i] = temp;
+					next_char = fgetc(f);
+					i++;
+				}
+				temp_word[i] = '\0';
+				printf("%s\n", temp_word);
+				add_word(words, temp_word, words_size_pointer, pos);
+				move_to_front(pos, words);
+				fprintf(f_two, "%s", temp_word);
+				if(next_char != '\n'){
+					fprintf(f_two, " ");
+				}
+				ungetc(next_char, f);
+			}
+		}
+		else if((next_char-128) == 122){
+			i = 0;
+			next_char = fgetc(f);
+			pos_temp = next_char;
+			next_char = fgetc(f);
+			pos = next_char;
+			pos = ((pos_temp*256)+376)+pos;
+			if(pos>count){
+				printf("%d\n", pos);
+				next_char = fgetc(f);
+				while(next_char != '\n' && next_char<128){
+					temp = (char)next_char;
+					temp_word[i] = temp;
+					next_char = fgetc(f);
+					i++;
+				}
+				temp_word[i] = '\0';
+				printf("%s\n", temp_word);
+				add_word(words, temp_word, words_size_pointer, pos);
+				move_to_front(pos, words);
+				fprintf(f_two, "%s", temp_word);
+				if(next_char != '\n'){
+					fprintf(f_two, " ");
+				}
+				ungetc(next_char, f);
+			}
+			else{
+				fprintf(f_two, "%s", (*words)[pos]);
+				move_to_front(pos, words);
+				if((next_char = fgetc(f)) != '\n'){
+					fprintf(f_two, " ");
+				}
+				ungetc(next_char, f);
+			}
+		}
+			
+		
+		else if(next_char == '\n'){
+			fprintf(f_two, "\n");
+		}
+		else if(next_char>= 128){
+			pos = (next_char - 128);
+			fprintf(f_two, "%s", (*words)[pos]);
+			move_to_front(pos, words);
+			if((next_char = fgetc(f)) != '\n'){
+				fprintf(f_two, " ");
+			}
+			ungetc(next_char, f);
+		}
+			
+	}
+	
+
+}
+
+
+int main(int argc, char *argv[]){
+	int x;
+	int i;
+	int j;
+	x = strlen(argv[1]);
+	char fi[x];
+	char* mtf = "txt";
+	FILE *f;
+	FILE *f_two;
+	for(j = 0; j<(x-3); j++){
+		fi[j] = argv[1][j];
+	}
+	strcat(fi, mtf);
+	f = fopen(argv[1], "r");
+	f_two = fopen(fi, "w");
+	char c;
+	c = fgetc(f);
+	c = fgetc(f);
+	c = fgetc(f);
+	c = fgetc(f);
+	char** words_ptr;
+	words_ptr = (char **) malloc(5 * (sizeof(*words_ptr)));
+	char*** words = &words_ptr;
+	int words_size = 5;
+	int* words_size_pointer = &words_size;
+	decode(f, f_two, words, words_size_pointer);
+	fclose(f);
+	fclose(f_two);
+	free(words_ptr);
+	return 0;
+
+
+}
