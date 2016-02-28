@@ -1,0 +1,5 @@
+# false-positives
+hardening-no-fortify-functions
+
+# perhaps not important for plugins
+library-not-linked-against-libc usr/lib/*/abiword-*/plugins/*

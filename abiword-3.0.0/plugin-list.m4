@@ -1,0 +1,1 @@
+rsvg s5 hrtext pdf goffice openxml babelfish iscii passepartout psion hancom t602 mswrite paint garble collab mathview opendocument pdb docbook clarisworks gda ots wikipedia wml command opml wmf loadbindings epub latex eml bmp wpg applix aiksaurus wordperfect gdict mht openwriter mif urldict presentation sdw freetranslation xslfo kword gimp google grammar

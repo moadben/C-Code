@@ -1,0 +1,3 @@
+usr/include
+usr/lib/*/pkgconfig/abiword-*.pc
+#usr/share/gir-*

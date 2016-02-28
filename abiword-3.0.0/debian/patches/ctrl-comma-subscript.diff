@@ -1,0 +1,26 @@
+From: Patrik Fimml <patrik@fimml.at>
+Subject: [PATCH] fixes/ctrl-comma-subscript
+
+Make ctrl-comma (C-,) a shortcut for subscript text.
+
+Signed-off-by: Patrik Fimml <patrik@fimml.at>
+
+---
+ src/wp/ap/xp/ap_LB_Default.cpp |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/wp/ap/xp/ap_LB_Default.cpp b/src/wp/ap/xp/ap_LB_Default.cpp
+index 8581fb1..c7b8165 100644
+--- a/src/wp/ap/xp/ap_LB_Default.cpp
++++ b/src/wp/ap/xp/ap_LB_Default.cpp
+@@ -480,7 +480,7 @@ ap_bs_Char CharTable[] =
+ 	{0x29, /* )      */ { "insertClosingParenthesis","",			"",				""					}},
+ 	{0x2a, /* *      */ { "insertData",			"viewPara",			"",				""					}},
+ 	{0x2b, /* +      */ { "insertData",			"zoomIn",			"",				""					}},
+-	{0x2c, /* ,      */ { "insertData",			"",					"",				""					}},
++	{0x2c, /* ,      */ { "insertData",			"toggleSub",					"",				""					}},
+ 	{0x2d, /* -      */ { "insertData",			"zoomOut",			"",				""					}},
+ 	{0x2e, /* .      */ { "insertData",			"pasteSpecial",		"",				""					}},
+ 	{0x2f, /* /      */ { "insertData",			"",					"",				""					}},
+-- 
+tg: (a60ef3b..) fixes/ctrl-comma-subscript (depends on: master)

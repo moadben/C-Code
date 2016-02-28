@@ -1,0 +1,26 @@
+From: Patrik Fimml <patrik@fimml.at>
+Subject: [PATCH] debian/autosave
+
+Enable autosave by default
+
+Signed-off-by: Patrik Fimml <patrik@fimml.at>
+
+---
+ src/af/xap/xp/xap_Prefs_SchemeIds.h |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/af/xap/xp/xap_Prefs_SchemeIds.h b/src/af/xap/xp/xap_Prefs_SchemeIds.h
+index a88650b..0fe58d4 100644
+--- a/src/af/xap/xp/xap_Prefs_SchemeIds.h
++++ b/src/af/xap/xp/xap_Prefs_SchemeIds.h
+@@ -77,7 +77,7 @@
+ #define XAP_PREF_DEFAULT_LatinLigatures 	         "0"
+ 
+ #define XAP_PREF_KEY_AutoSaveFile					"AutoSaveFile"
+-#define XAP_PREF_DEFAULT_AutoSaveFile				"0" 						/* Auto save files by default */
++#define XAP_PREF_DEFAULT_AutoSaveFile				"1" 						/* Auto save files by default */
+ 
+ #define XAP_PREF_KEY_AutoSaveFilePeriod 				"AutoSaveFilePeriod"
+ #define XAP_PREF_DEFAULT_AutoSaveFilePeriod 			"5" 						/* Auto save files by default */
+-- 
+tg: (a60ef3b..) debian/autosave (depends on: master)

@@ -1,0 +1,173 @@
+Source: abiword
+Section: gnome
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Build-Depends: debhelper (>= 9), dh-autoreconf, quilt, imagemagick
+ ,bison
+ ,flex
+# ,gobject-introspection
+#  ,libgirepository1.0-dev
+ ,libaiksaurus-1.2-dev
+ ,libaiksaurusgtk-1.2-dev
+ ,libasio-dev
+ ,libchamplain-gtk-0.12-dev
+ ,libebook1.2-dev (>= 3.8.5)
+ ,libecal1.2-dev (>= 3.8.5)
+ ,libenchant-dev
+ ,libfribidi-dev
+ ,libgoffice-0.10-dev
+ ,libgtk2.0-dev
+ ,libglib2.0-dev
+ ,libgtk-3-dev
+ ,libgtkmathview-dev
+ ,libjpeg8-dev
+ ,liblink-grammar4-dev
+ ,libloudmouth1-dev
+ ,libots-dev
+ ,libpng-dev
+ ,librdf0-dev
+ ,libreadline-dev
+ ,librsvg2-dev
+ ,libsoup2.4-dev
+ ,libtelepathy-glib-dev
+ ,libtidy-dev
+ ,libwmf-dev
+ ,libwpg-dev
+ ,libwps-dev
+ ,libwv-dev
+ ,libxslt-dev | libxslt1-dev
+# subversion is used by get-orig-source
+ ,subversion, svn2cl | subversion-tools (<< 1.7.5)
+# valgrind is only used in post-build tests, enable on available architectures
+ ,valgrind [amd64 armhf i386 powerpc]
+Standards-Version: 3.9.4
+Homepage: http://www.abisource.com/
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/abiword.git
+Vcs-Git: git://anonscm.debian.org/collab-maint/abiword.git
+
+Package: abiword-common
+Section: editors
+Architecture: all
+Depends: ${misc:Depends}
+Description: efficient, featureful word processor with collaboration -- common files
+ AbiWord is a full-featured, efficient word processing application.
+ It is suitable for a wide variety of word processing tasks, and
+ is extensible with a variety of plugins.
+ .
+ This package contains the common files that are used on all architectures
+ without modification.
+
+Package: abiword
+Section: editors
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, abiword-common (>= ${source:Version}), gsfonts
+Recommends: abiword-plugin-grammar, abiword-plugin-mathview, aspell-en | aspell-dictionary, poppler-utils, fonts-liberation
+Description: efficient, featureful word processor with collaboration
+ AbiWord is a full-featured, efficient word processing application.
+ It is suitable for a wide variety of word processing tasks, and
+ is extensible with a variety of plugins.
+ .
+ This package includes many of the available import/export plugins allowing
+ AbiWord to interact with ODT, WordPerfect, and other formats.  It also
+ includes tools plugins, offering live collaboration with AbiWord users
+ on Linux and Windows (using TCP or Jabber/XMPP), web translation and
+ dictionary support, and more.
+ .
+ Additional plugins that require significant amounts of extra software to
+ function are in the various abiword-plugin-* packages.
+
+Package: abiword-plugin-grammar
+Section: editors
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, abiword (= ${binary:Version})
+Description: grammar checking plugin for AbiWord
+ AbiWord is a full-featured, efficient word processing application.
+ It is suitable for a wide variety of word processing tasks, and
+ is extensible with a variety of plugins.
+ .
+ This package contains an in-line grammar checking system for AbiWord
+ documents.
+
+Package: abiword-plugin-mathview
+Section: editors
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, abiword (= ${binary:Version}), fonts-lyx
+Description: equation editor plugin for AbiWord
+ AbiWord is a full-featured, efficient word processing application.
+ It is suitable for a wide variety of word processing tasks, and
+ is extensible with a variety of plugins.
+ .
+ This package contains an equation editing system for AbiWord
+ documents.
+
+Package: libabiword-3.0
+Section: libs
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: efficient, featureful word processor with collaboration -- shared library
+ AbiWord is a full-featured, efficient word processing application.
+ It is suitable for a wide variety of word processing tasks, and
+ is extensible with a variety of plugins.
+ .
+ This package contains the shared library, enabling other applications to
+ integrate AbiWord functionality.
+
+Package: libabiword-3.0-dev
+Section: libdevel
+Architecture: any
+Depends: ${misc:Depends}, libabiword-3.0 (= ${binary:Version})
+        ,libcairo-dev | libcairo2-dev
+        ,libebook1.2-dev
+        ,libenchant-dev
+        ,libecal1.2-dev
+        ,libfribidi-dev
+        ,libglib2.0-dev
+        ,libgoffice-0.10-dev
+        ,libgsf-1-dev
+        ,libgtk-3-dev
+        ,libical-dev (>= 0.46)
+        ,libpango1.0-dev
+        ,librasqal3-dev
+        ,librdf0-dev
+        ,librsvg2-dev
+        ,libwv-dev
+        ,libx11-dev
+        ,libxslt-dev | libxslt1-dev
+Description: efficient, featureful word processor with collaboration -- development files
+ AbiWord is a full-featured, efficient word processing application.
+ It is suitable for a wide variety of word processing tasks, and
+ is extensible with a variety of plugins.
+ .
+ This package contains development files for software linking against
+ libabiword-3.0.
+
+#Package: gir1.2-abiword-3.0
+#Section: introspection
+#Architecture: any
+#Depends: ${gir:Depends}, ${misc:Depends}
+#Description: GObject introspection data for libabiword
+# This package contains introspection data for libabiword.
+# .
+# It can be used by packages using the GIRepository format to generate
+# dynamic bindings.
+
+Package: abiword-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: abiword (= ${binary:Version}), ${misc:Depends}
+Description: debugging symbols for abiword word processor
+ AbiWord is a full-featured, efficient word processing application.
+ It is suitable for a wide variety of word processing tasks, and
+ is extensible with a variety of plugins.
+ .
+ This package includes many of the available import/export plugins allowing
+ AbiWord to interact with ODT, WordPerfect, and other formats.  It also
+ includes tools plugins, offering live collaboration with AbiWord users
+ on Linux and Windows (using TCP or Jabber/XMPP), web translation and
+ dictionary support, and more.
+ .
+ This package contains debugging symbols needed for debugging abiword.
