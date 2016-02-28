@@ -1,6 +1,0 @@
-
-Building using --with-gtk2 fixes the following bugs:
-
-    - (Closes: #672150) "Clip art window is practically unusable".
-
-but completely breaks all collaborative editing.

@@ -1,9 +1,0 @@
-# uscan(1) configuration file.
-version=3
-
-## all versions
-opts=\
-dversionmangle=s/\+svn\d+//,\
-downloadurlmangle=s/([0-9.]+)\//$1\/source\/abiword-$1\.tar\.gz/,\
-filenamemangle=s/.*/orig.tar.gz/,\
- http://www.abisource.com/downloads/abiword/ ([0-9.]+)\/

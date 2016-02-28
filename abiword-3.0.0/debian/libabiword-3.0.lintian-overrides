@@ -1,7 +1,0 @@
-# Upstream build system do not generate symlink to libabiword-*.so.N
-# libabiword-*.so is a library itself, (binary file) not a symlink.
-dev-pkg-without-shlib-symlink
-
-# symbols are not very useful for CPP,
-# see http://wiki.debian.org/UsingSymbolsFiles#See_also
-no-symbols-control-file

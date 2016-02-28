@@ -1,5 +1,0 @@
-usr/bin
-usr/lib/*/abiword-*/plugins/*.so
-usr/share/applications
-abiword.png			usr/share/pixmaps
-debian/abiword.xpm		usr/share/pixmaps
